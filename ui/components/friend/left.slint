@@ -1,5 +1,19 @@
+import { SCard, SText } from "../../modules/surrealism-ui/index.slint";
+import { ROOT-GLOBAL } from "../../global.slint";
+
 export component LeftPanel inherits Rectangle{
     VerticalLayout {
-        
+        spacing: 2px;
+        for item in ["Jack","Willins"]: SCard {
+            width: parent.width;
+            background:ROOT-GLOBAL.theme-color-chat;
+            border-type: None;
+            HorizontalLayout {
+                padding: 16px;
+                SText {
+                    text: item;
+                }
+            }
+        }
     }
 }
