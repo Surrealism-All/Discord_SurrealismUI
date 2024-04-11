@@ -1,15 +1,52 @@
-import {Hello} from "../components/index.slint";
-import { SButton } from "../modules/surrealism-ui/index.slint";
+import {ListWindow,ChatWindow,FriendWindow} from "../components/index.slint";
+import { SButton, STab, SMenu } from "../modules/surrealism-ui/index.slint";
+import { ROOT_GLOBAL } from "../global.slint";
 
 export component MainView {
   height: 100%;
   width: 100%;
-  VerticalLayout {
-    Hello{}
-    Rectangle {
-      SButton {
-        theme:Dark;
-        text: "Click Me!";
+  HorizontalLayout {
+    menu_wrap:= Rectangle {
+      clip: false;
+      z: 111;
+      menu:= SMenu {
+        background: #212227;
+        active-color: #4649EF;
+        menu-data: [
+          {id:"0",icon:@image-url("../assets/discord.svg"),name:"PrivateMsg"},
+          {id:"1",icon:@image-url("../assets/surrealism.svg"),name:"SurrealismUI"},
+          {id:"2",icon:@image-url("../assets/rust.svg"),name:"Rust"},
+        ];
+        sub-menu-data: [
+          {id:"3",icon:@image-url("../assets/add.svg"),name:"Add"},
+          {id:"4",icon:@image-url("../assets/download.svg"),name:"Download"},
+         
+        ];
+      }
+    }
+    main_wrap:= Rectangle {
+      HorizontalLayout {
+        list:= Rectangle {
+          z: 100;
+          background: ROOT-GLOBAL.theme-color-list;
+          width: 240px;
+          ListWindow {
+            height: 100%;
+            width: 100%;
+          }
+        }
+       chat:= Rectangle {
+          z: 100;
+          background: ROOT-GLOBAL.theme-color-chat;
+          if menu.active == "0": FriendWindow{
+            height: 100%;
+            width: 100%;
+          }
+          if menu.active == "1" : ChatWindow {
+            height: 100%;
+            width: 100%;
+          }
+        }
       }
     }
   }

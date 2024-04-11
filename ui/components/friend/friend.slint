@@ -1,0 +1,94 @@
+import { SText,SCard, SIcon, SButton } from "../../modules/surrealism-ui/index.slint";
+import { ROOT-GLOBAL } from "../../global.slint";
+import { PaddingType } from "../../modules/surrealism-ui/use/index.slint";
+import { LeftPanel } from "./left.slint";
+export component FriendWindow {
+    VerticalLayout {
+        header:= SCard{
+            background: ROOT-GLOBAL.theme-color-chat; 
+            width: 100%;
+            height: 46px;
+            border-type: None;
+            HorizontalLayout {
+                padding-left: 12px;
+                spacing: 16px;
+                Rectangle {
+                    HorizontalLayout {
+                        spacing: 4px;
+                        Rectangle {
+                            width: f-icon.width;
+                            f_icon:=SIcon {
+                                height: 18px;
+                                width: 18px;
+                                source: @image-url("../../assets/friend.svg");
+                            }
+                        }
+                        Rectangle {
+                            width: f-text.width;
+                            f_text:=SText {
+                                wrap: no-wrap;
+                                theme: Dark;
+                                font-size: 16px;
+                                text: "好友";
+                                font-weight: 700;
+                            }
+                        }
+                    }
+                }
+                for item in ["在线","全部"]: Rectangle {
+                    width: btn.width;
+                    btn:= SButton {
+                        text: item;
+                        padding-type: PaddingType.Tag;
+                        font-size: 14px;
+                        font-weight: 700;
+                    }
+                }
+                
+            }
+        }
+        content:= Rectangle{
+            height: root.height - header.height;
+            HorizontalLayout {
+                left:= LeftPanel{
+                    height: 100%;
+                    width: parent.width - 300px;
+                }
+                right:= Rectangle{
+                    width: 300px;
+                    height: 100%;
+                    drop-shadow-blur: 2px;
+                    drop-shadow-color: #aaa;
+                    drop-shadow-offset-y: 4px;
+                    background: ROOT-GLOBAL.theme-color-chat;
+                    VerticalLayout {
+                        height: 100%;
+                        padding-left: 12px;
+                        Rectangle {
+                            height: 60px;
+                            SText {
+                                width: 100%;
+                                theme: Dark;
+                                font-size: 18px;
+                                text: "当前活动";
+                                font-weight: 700;
+                            }
+                        }
+                        Rectangle {
+                            width: 100%;
+                            
+                            SText {
+                                y: 0;
+                                theme: Dark;
+                                font-size: 16px;
+                                text: "现在很安静......";
+                                font-weight: 700;
+                            }
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
