@@ -1,6 +1,7 @@
-import { SCard,SAvatar,SBadge, SIcon } from "../../modules/surrealism-ui/index.slint";
+import { SCard,SAvatar,SBadge, SIcon, SText } from "../../modules/surrealism-ui/index.slint";
 import { Themes,UseSurrealismFn,ColorLevel } from "../../modules/surrealism-ui/use/index.slint";
 import { ROOT-GLOBAL } from "../../global.slint";
+import { SButton } from "../../modules/surrealism-ui/src/button/index.slint";
 export component ListWindow inherits Rectangle{
     VerticalLayout {
         width: 100%;
@@ -10,9 +11,45 @@ export component ListWindow inherits Rectangle{
             background: ROOT-GLOBAL.theme-color-list;
             border-type: None;
             width: 100%;
+            SButton {
+                background: #1E1F22;
+                padding-type: Small;
+                font-size: 12px;
+                text: "寻找或开始新的对话";
+                font-weight: 700;
+                width: 90%;
+                border-type: None;
+            }
         }
         center:= Rectangle {
-            VerticalLayout {}
+            height: parent.height - header.height - footer.height;
+            VerticalLayout {
+                alignment: start;
+                spacing: 4px;
+                for item in 5: SCard{
+                    width: parent.width;
+                    border-type: None;
+                    background: ROOT-GLOBAL.theme-color-list;
+                    height: 60px;
+                    HorizontalLayout {
+                        Rectangle {
+                            width: 48px;
+                            SIcon {
+                                source: @image-url("../../assets/avatar.png");
+                                height: 24px;
+                                width: 24px;
+                            }
+                        }
+                        Rectangle {
+                            width: parent.width - 48px;
+                            SText {
+                                x: 0;
+                                text: "Willins.Sheng";
+                            }
+                        }
+                    }
+                }
+            }
         }
         footer:= SCard {
             height: 46px;
@@ -42,6 +79,14 @@ export component ListWindow inherits Rectangle{
                             clip: true;
                             icon: @image-url("");
                         }
+                    }
+                }
+                Rectangle {
+                    clip: true;
+                    SText {
+                        width: parent.width;
+                        wrap: no-wrap;
+                        text: "Willins.Sheng";
                     }
                 }
                 HorizontalLayout {
