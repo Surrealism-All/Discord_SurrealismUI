@@ -1,3 +1,90 @@
-export component ListWindow {
-    
+import { SCard,SAvatar,SBadge, SIcon } from "../../modules/surrealism-ui/index.slint";
+import { Themes,UseSurrealismFn,ColorLevel } from "../../modules/surrealism-ui/use/index.slint";
+import { ROOT-GLOBAL } from "../../global.slint";
+export component ListWindow inherits Rectangle{
+    VerticalLayout {
+        width: 100%;
+        alignment: space-between;
+        header:= SCard {
+            height: 46px;
+            background: ROOT-GLOBAL.theme-color-list;
+            border-type: None;
+            width: 100%;
+        }
+        center:= Rectangle {
+            VerticalLayout {}
+        }
+        footer:= SCard {
+            height: 46px;
+            background: #232428;
+            border-type: None;
+            width: 100%;
+            HorizontalLayout {
+                alignment: space-between;
+                Rectangle {
+                    width: 60px;
+                    Rectangle {
+                        height: avatar.height;
+                        width: avatar.width;
+                        avatar:= SAvatar {
+                            height: 36px;
+                            width: 36px;
+                            avatar-size: 24px;
+                            avatar: @image-url("../../assets/avatar.png");
+                        }
+                        SBadge {
+                            height: 12px;
+                            width: 12px;
+                            theme: Success;
+                            x: self.get-x(avatar.width);
+                            y: self.get-y(avatar.height);
+                            position: RightBottom;
+                            clip: true;
+                            icon: @image-url("");
+                        }
+                    }
+                }
+                HorizontalLayout {
+                    width: 45%;
+                    alignment: space-around;
+                    Rectangle {
+                        SIcon {
+                            private property <bool> is-close: false;
+                            height: 18px;
+                            width: 18px;
+                            colorize: self.get-colorize();
+                            source: @image-url("../../assets/Voice-2.svg");
+                            clicked => {
+                                is-close = !is-close;
+                                if is-close{
+                                    self.source = @image-url("../../assets/Voice-4.svg");
+                                    self.colorize = #F23F42;
+                                }else{
+                                    self.source = @image-url("../../assets/Voice-2.svg");
+                                    self.colorize = UseSurrealismFn.get-color-dark(ColorLevel.Font);
+                                }
+                            }
+                        }
+                        
+                    }
+                    Rectangle {
+                        SIcon {
+                            height: 18px;
+                            width: 18px;
+                            colorize: self.get-colorize();
+                            source: @image-url("../../assets/earphone.svg");
+                        }
+                    }
+                    Rectangle {
+                        SIcon {
+                            height: 18px;
+                            width: 18px;
+                            colorize: self.get-colorize();
+                            source: @image-url("../../assets/set.svg");
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

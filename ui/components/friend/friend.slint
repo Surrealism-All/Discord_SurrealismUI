@@ -1,7 +1,8 @@
-import { SText,SCard, SIcon, SButton } from "../../modules/surrealism-ui/index.slint";
+import { SText,SCard, SIcon, SButton, SDivider } from "../../modules/surrealism-ui/index.slint";
 import { ROOT-GLOBAL } from "../../global.slint";
 import { PaddingType } from "../../modules/surrealism-ui/use/index.slint";
 import { LeftPanel } from "./left.slint";
+
 export component FriendWindow {
     VerticalLayout {
         header:= SCard{
@@ -31,6 +32,13 @@ export component FriendWindow {
                                 font-size: 16px;
                                 text: "好友";
                                 font-weight: 700;
+                            }
+                        }
+                        Rectangle {
+                            width: 6px;
+                            SDivider {
+                                height: 23px;
+                                width: 1px;
                             }
                         }
                     }

@@ -1,4 +1,4 @@
-import { SCard, SText } from "../../modules/surrealism-ui/index.slint";
+import { SCard, SText, SAvatar, SBadge, SIcon } from "../../modules/surrealism-ui/index.slint";
 import { ROOT-GLOBAL } from "../../global.slint";
 
 export component LeftPanel inherits Rectangle{
@@ -9,9 +9,64 @@ export component LeftPanel inherits Rectangle{
             background:ROOT-GLOBAL.theme-color-chat;
             border-type: None;
             HorizontalLayout {
-                padding: 16px;
-                SText {
-                    text: item;
+                HorizontalLayout {
+                    padding: 16px;
+                    spacing: 16px;
+                    Rectangle {
+                        height: avatar.height;
+                        width: avatar.width;
+                        avatar:= SAvatar {
+                            height: 36px;
+                            width: 36px;
+                            avatar-size: 24px;
+                            avatar: @image-url("../../assets/avatar.png");
+                        }
+                        SBadge {
+                            height: 12px;
+                            width: 12px;
+                            theme: Success;
+                            x: self.get-x(avatar.width);
+                            y: self.get-y(avatar.height);
+                            position: RightBottom;
+                            clip: true;
+                            icon: @image-url("");
+                        }
+                    }
+                    VerticalLayout {
+                        spacing: 4px;
+                        SText {
+                            font-size: 16px;
+                            text: item;
+                            font-weight: 700;
+                        }
+                        SText {
+                            font-size: 14px;
+                            text: "在线";
+                        }
+                    }
+                }
+                HorizontalLayout {
+                    width: 92px;
+                    padding: 16px;
+                    alignment: space-between;
+                    Rectangle {
+                        SIcon {
+                            height: 22px;
+                            width: 22px;
+                            theme: Dark;
+                            colorize: self.get-colorize();
+                            source: @image-url("../../assets/message.svg");
+                        }
+                    }
+                    Rectangle {
+                        SIcon {
+                            height: 22px;
+                            width: 22px;
+                            theme: Dark;
+                            colorize: self.get-colorize();
+                            source: @image-url("../../assets/more-one.svg");
+                        }
+                    }
                 }
             }
         }
